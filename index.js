@@ -1,15 +1,3 @@
-const libPath = require('path');
-const libFs = require('fs');
-
-function isHtml(url) {
-  return /\.(html|htm)($|\?)/.test(url);
-}
-
-function appendScript(body, scriptUrl, configSchemaStr) {
-  const replaceScript = [`</body>`, `<script src="${scriptUrl}"></script><script>eruda.init(${configSchemaStr});</script></body>`];
-  return body.replace(...replaceScript);
-}
-
 function getConfigSchemaStr(config) {
   const configSchema = {};
   const container = config.get('container');
@@ -26,10 +14,6 @@ function getConfigSchemaStr(config) {
 
 module.exports = {
   configSchema: {
-    version: {
-      type: 'string',
-      default: '1.5.5'
-    },
     container: {
       type: 'string'
     },
@@ -50,19 +34,12 @@ module.exports = {
       type: 'boolean'
     }
   },
-  hooks: {
-    async onRoute(ctx, next, { config }) {
-      if (isHtml(ctx.path)) {
-        const rootPath = config.get('$.root');
-        const version = config.get('version');
-        const filePath = libPath.join(rootPath, ctx.path);
-        const fileContent = libFs.readFileSync(filePath, 'utf8');
-        const scriptUrl = `//cdnjs.cloudflare.com/ajax/libs/eruda/${version}/eruda.min.js`;
-
-        ctx.body = appendScript(fileContent, scriptUrl, getConfigSchemaStr(config));
+  assets: {
+    script: [
+      './assets/eruda.js',
+      config => {
+        return `eruda.init(${getConfigSchemaStr(config)});`
       }
-
-      await next();
-    }
+    ]
   }
 };
