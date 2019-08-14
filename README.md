@@ -1,5 +1,7 @@
 # svrx-plugin-eruda
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/x-orpheus/svrx-plugin-eruda.svg)](https://greenkeeper.io/)
+
 The portal plugin for eruda
 
 ```bash
