@@ -1,6 +1,6 @@
 {
   "name": "svrx-plugin-eruda",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "The svrx plugin for eruda",
   "main": "index.js",
   "keywords": [
