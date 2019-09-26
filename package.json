@@ -1,17 +1,37 @@
 {
   "name": "svrx-plugin-eruda",
   "version": "0.0.2",
-  "description": "eruda plugin for server-x",
+  "description": "The svrx plugin for eruda",
   "main": "index.js",
-  "scripts": {},
-  "engines": {
-    "svrx": "~0.0.2"
-  },
   "keywords": [
     "svrx",
-    "svrx-plugin"
+    "svrx-plugin",
+    "eruda"
   ],
-  "license": "MIT",
-  "devDependencies": {},
-  "dependencies": {}
+  "engines": {
+    "svrx": "^1.0.0"
+  },
+  "author": "svrxjs",
+  "scripts": {
+    "start": "node ./example/start.js",
+    "lint": "eslint \"**/*.js\"",
+    "lint:fix": "eslint \"**/*.js\" --fix"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@svrx/eslint-config": "^1.0.0",
+    "eslint": "^6.2.0",
+    "global-modules": "^2.0.0",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  },
+  "license": "MIT"
 }
