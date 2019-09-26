@@ -15,31 +15,29 @@ function getConfigSchemaStr(config) {
 module.exports = {
   configSchema: {
     container: {
-      type: 'string'
+      type: 'string',
     },
     tool: {
       oneOf: [
         {
-          type: 'array'
+          type: 'array',
         },
         {
-          type: 'string'
-        }
-      ]
+          type: 'string',
+        },
+      ],
     },
     autoScale: {
-      type: 'boolean'
+      type: 'boolean',
     },
     useShadowDom: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
   assets: {
     script: [
       './assets/eruda.js',
-      config => {
-        return `eruda.init(${getConfigSchemaStr(config)});`
-      }
-    ]
-  }
+      (config) => `eruda.init(${getConfigSchemaStr(config)});`,
+    ],
+  },
 };
